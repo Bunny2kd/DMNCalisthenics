@@ -1,0 +1,1827 @@
+/* ========================================
+   DMNCalisthenics - App Styles
+   Professional Mobile-First App Design
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0f1419;
+    --secondary-color: #d4af37;
+    --tertiary-color: #6366f1;
+    --dark-bg: #0f1419;
+    --dark-bg-secondary: #1a1f2e;
+    --light-bg: #f5f5f5;
+    --text-dark: #0f1419;
+    --text-light: #ffffff;
+    --text-light-secondary: #d0d0d0;
+    --accent: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--light-bg);
+    color: var(--text-dark);
+}
+
+body.dark-mode {
+    background: var(--dark-bg);
+    color: var(--text-light);
+}
+
+/* Dark Mode Enhancements */
+body.dark-mode .dashboard-section {
+    background: var(--dark-bg-secondary);
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .workout-card {
+    background: var(--dark-bg-secondary);
+    border-color: #3a3a3a;
+    color: var(--text-light);
+}
+
+body.dark-mode .modal-content {
+    background: var(--dark-bg-secondary);
+    color: var(--text-light);
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea,
+body.dark-mode select {
+    background: #1a1a1a;
+    color: var(--text-light);
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .form-group label {
+    color: var(--text-light-secondary);
+}
+
+body.dark-mode .stat-box {
+    background: var(--dark-bg-secondary);
+    border-color: #3a3a3a;
+    color: var(--text-light);
+}
+
+body.dark-mode .exercise-card {
+    background: var(--dark-bg-secondary);
+    border-color: #3a3a3a;
+    color: var(--text-light);
+}
+
+body.dark-mode .exercise-card h4 {
+    color: var(--secondary-color);
+}
+
+body.dark-mode .achievement-badge {
+    background: var(--dark-bg-secondary);
+    border-color: #3a3a3a;
+    color: var(--text-light);
+}
+
+body.dark-mode .bottom-nav {
+    background: var(--dark-bg-secondary);
+    border-top: 2px solid #3a3a3a;
+}
+
+/* ========================================
+   App Container & Layout
+   ======================================== */
+
+.app-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.status-bar {
+    background: var(--dark-bg);
+    color: white;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-icons {
+    display: flex;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+/* ========================================
+   App Header
+   ======================================== */
+
+.app-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--secondary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.logo-img {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.header-btn {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.header-btn:hover {
+    background: rgba(212, 175, 55, 0.08);
+    transform: none;
+}
+
+/* ========================================
+   Main Content Area
+   ======================================== */
+
+.app-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px;
+    padding: 0 0 80px 0;
+}
+
+.view {
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+.view.active {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========================================
+   Dashboard View
+   ======================================== */
+
+.dashboard-hero {
+    background: linear-gradient(135deg, rgba(15, 20, 25, 0.8) 0%, rgba(26, 31, 46, 0.8) 100%), url('Media/Hero/dashboard-hero.jpg') center/cover;
+    background-attachment: fixed;
+    color: white;
+    padding: 30px 20px;
+    border-radius: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.greeting {
+    margin-bottom: 20px;
+}
+
+.greeting h2 {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.greeting p {
+    opacity: 0.8;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.stat {
+    background: rgba(212, 175, 55, 0.08);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.dashboard-section {
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.dashboard-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.workout-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-box i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.stat-box span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-box small {
+    display: block;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.nav-item {
+    background: white;
+    border: none;
+    padding: 25px 15px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-item:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.nav-item i {
+    font-size: 2rem;
+}
+
+.nav-item span {
+    font-weight: 600;
+}
+
+/* ========================================
+   Tabs
+   ======================================== */
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
+    background: white;
+    overflow-x: auto;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: #999;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+}
+
+/* ========================================
+   Training Section
+   ======================================== */
+
+.training-list {
+    padding: 20px;
+}
+
+.exercise-item {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.exercise-item:active {
+    transform: scale(0.98);
+}
+
+.exercise-info {
+    flex: 1;
+}
+
+.exercise-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.exercise-meta {
+    font-size: 0.85rem;
+    color: #999;
+    display: flex;
+    gap: 15px;
+}
+
+.difficulty-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.difficulty-beginner {
+    background: #d4edda;
+    color: #155724;
+}
+
+.difficulty-intermediate {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.difficulty-advanced {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.complete-btn {
+    background: var(--secondary-color);
+    border: none;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.complete-btn:hover {
+    transform: scale(1.05);
+}
+
+.complete-btn.completed {
+    background: var(--success);
+    color: white;
+}
+
+/* Exercise Card Detailed (Learning-Focused) */
+.exercise-card-detailed {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all 0.2s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.exercise-card-detailed:hover {
+    box-shadow: var(--shadow-lg);
+    transform: none;
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--dark-bg);
+    color: white;
+}
+
+.exercise-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.exercise-icon {
+    font-size: 1.8rem;
+}
+
+.exercise-title h4 {
+    font-size: 1rem;
+    margin: 0;
+    color: white;
+    font-weight: 600;
+}
+
+.exercise-status {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    opacity: 0.4;
+    transition: all 0.2s ease;
+}
+
+.exercise-status.completed {
+    background: rgba(16, 185, 129, 0.8);
+    opacity: 1;
+    color: white;
+}
+
+.exercise-body {
+    padding: 12px;
+}
+
+.exercise-description {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.exercise-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.detail-item {
+    background: #fafafa;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #f0f0f0;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #777;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.btn-learn {
+    width: 100%;
+}
+
+body.dark-mode .exercise-card-detailed {
+    background: var(--dark-bg-secondary);
+    border-color: rgba(212, 175, 55, 0.1);
+}
+
+body.dark-mode .exercise-description {
+    color: var(--text-light-secondary);
+}
+
+body.dark-mode .detail-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+body.dark-mode .detail-label {
+    color: var(--text-light-secondary);
+}
+
+body.dark-mode .detail-value {
+    color: var(--secondary-color);
+}
+
+/* ========================================
+   Nutrition Section
+   ======================================== */
+
+.nutrition-container {
+    padding: 20px;
+}
+
+.macro-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.macro {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border-top: 4px solid #999;
+    position: relative;
+    overflow: hidden;
+}
+
+.macro.protein {
+    border-top-color: #e74c3c;
+}
+
+.macro.carbs {
+    border-top-color: #f39c12;
+}
+
+.macro.fats {
+    border-top-color: #3498db;
+}
+
+.macro-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.macro-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.macro-goal {
+    display: block;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.meal-section {
+    margin-bottom: 25px;
+}
+
+.meal-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.meal-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meal-name {
+    font-weight: 600;
+}
+
+.meal-macros {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.meal-delete-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1.1rem;
+}
+
+.nutrition-tips {
+    margin-top: 25px;
+}
+
+.nutrition-tips h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.tip-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* Tip Card (Learning-Focused) */
+.tip-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateX(4px);
+}
+
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tip-emoji {
+    font-size: 1.5rem;
+}
+
+.tip-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.tip-content {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+body.dark-mode .tip-card {
+    background: var(--dark-bg-secondary);
+    border-left-color: var(--secondary-color);
+}
+
+body.dark-mode .tip-header h4 {
+    color: var(--text-light);
+}
+
+body.dark-mode .tip-content {
+    color: var(--text-light-secondary);
+}
+
+/* ========================================
+   Progress Section
+   ======================================== */
+
+.progress-section {
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.progress-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.chart-placeholder {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.pr-list,
+.workout-history {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pr-item,
+.workout-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+}
+
+.pr-info h4,
+.workout-date {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.pr-value,
+.workout-sets {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+body.dark-mode .pr-item,
+body.dark-mode .workout-item {
+    background: var(--dark-bg-secondary);
+    border-color: #3a3a3a;
+    color: var(--text-light);
+}
+
+body.dark-mode .pr-info h4,
+body.dark-mode .workout-date {
+    color: var(--text-light);
+}
+
+body.dark-mode .pr-value,
+body.dark-mode .workout-sets {
+    color: var(--secondary-color);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.achievement-badge {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.achievement-badge:hover {
+    transform: scale(1.05);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.achievement-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.achievement-unlocked {
+    opacity: 1;
+}
+
+.achievement-locked {
+    opacity: 0.3;
+}
+
+/* ========================================
+   Profile Section
+   ======================================== */
+
+.profile-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2d2d2d 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 20px;
+    box-shadow: var(--shadow);
+}
+
+.profile-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.profile-header p {
+    opacity: 0.9;
+}
+
+.profile-section {
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.profile-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.preference-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+}
+
+.preference-item span {
+    font-weight: 600;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 28px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--secondary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+.goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.goal-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+}
+
+.goal-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.goal-progress-fill {
+    height: 100%;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+/* ========================================
+   Modals
+   ======================================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    align-items: flex-end;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    animation: slideUp 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-video {
+    max-height: 95vh;
+}
+
+.video-container {
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f5f5f5;
+    aspect-ratio: 16 / 9;
+}
+
+.video-description {
+    margin-top: 20px;
+}
+
+.video-description h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.video-description p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.video-tips {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.video-tips h4 {
+    margin-top: 0;
+    color: var(--text-dark);
+}
+
+.video-tips ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.video-tips li {
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+body.dark-mode .video-container {
+    background: #2a2a2a;
+}
+
+body.dark-mode .video-description h3 {
+    color: var(--text-light);
+}
+
+body.dark-mode .video-description p {
+    color: var(--text-light-secondary);
+}
+
+body.dark-mode .video-tips {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: var(--secondary-color);
+}
+
+body.dark-mode .video-tips h4 {
+    color: var(--text-light);
+}
+
+body.dark-mode .video-tips li {
+    color: var(--text-light-secondary);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.settings-list,
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.settings-item,
+.settings-item.danger {
+    background: white;
+    border: 1px solid #eee;
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.settings-item:hover {
+    background: #f8f9fa;
+    border-color: var(--secondary-color);
+}
+
+.settings-item.danger {
+    color: var(--accent);
+}
+
+.settings-item.danger:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.settings-item i {
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+
+.btn {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    width: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--secondary-color), #e6c200);
+    color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+
+.btn-primary:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.btn-secondary {
+    background: var(--tertiary-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+.btn-secondary:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-danger {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Exercise Actions */
+.exercise-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.exercise-actions .btn {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+}
+
+/* ========================================
+   Bottom Navigation
+   ======================================== */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    z-index: 100;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    color: #999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.nav-tab.active {
+    color: var(--secondary-color);
+}
+
+.nav-tab i {
+    font-size: 1.5rem;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+@media (max-width: 480px) {
+    .app-title {
+        font-size: 1.3rem;
+    }
+
+    .dashboard-hero {
+        padding: 25px 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 769px) {
+    .app-container {
+        margin: 0 auto;
+        max-width: 480px;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Tablet Landscape - 768px to 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .app-container {
+        max-width: 750px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .exercises-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .meals-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop - 1025px to 1440px */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .app-container {
+        max-width: 900px;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .app-header {
+        padding: 1.5rem 2rem;
+    }
+
+    .app-title {
+        font-size: 1.8rem;
+    }
+
+    .dashboard-hero {
+        padding: 2rem;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 1.5rem;
+    }
+
+    .greeting h2 {
+        font-size: 2rem;
+    }
+
+    .greeting p {
+        font-size: 1rem;
+    }
+
+    .stats-summary {
+        gap: 1rem;
+    }
+
+    .stat-value {
+        font-size: 1.8rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    .nav-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-box {
+        padding: 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .stat-box i {
+        font-size: 2rem;
+    }
+
+    .stat-box span {
+        display: block;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0.5rem 0;
+    }
+
+    .exercises-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .meals-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .workout-card {
+        padding: 1.5rem;
+    }
+
+    .achievement-badge {
+        width: 110px;
+        height: 110px;
+    }
+
+    .achievement-text {
+        font-size: 0.9rem;
+    }
+
+    .dashboard-section {
+        padding: 1.5rem;
+    }
+
+    .dashboard-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Large Desktop - 1441px to 1920px */
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .app-container {
+        max-width: 1100px;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .app-header {
+        padding: 1.75rem 2.5rem;
+    }
+
+    .app-title {
+        font-size: 2rem;
+    }
+
+    .dashboard-hero {
+        padding: 2.5rem;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 2rem;
+    }
+
+    .greeting h2 {
+        font-size: 2.3rem;
+    }
+
+    .greeting p {
+        font-size: 1.1rem;
+    }
+
+    .stats-summary {
+        gap: 1.5rem;
+    }
+
+    .stat {
+        font-size: 1rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .nav-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .stat-box {
+        padding: 1.75rem;
+        font-size: 1rem;
+    }
+
+    .stat-box i {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .stat-box span {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0.75rem 0;
+    }
+
+    .stat-box small {
+        font-size: 0.95rem;
+    }
+
+    .exercises-list {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .meals-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .workout-card {
+        padding: 2rem;
+    }
+
+    .achievement-badge {
+        width: 130px;
+        height: 130px;
+    }
+
+    .achievement-text {
+        font-size: 1rem;
+    }
+
+    .dashboard-section {
+        padding: 2rem;
+    }
+
+    .dashboard-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Extra Large Desktop - 1921px+ (4K) */
+@media (min-width: 1921px) {
+    .app-container {
+        max-width: 1300px;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.2);
+    }
+
+    .status-bar {
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    .app-header {
+        padding: 2rem 3rem;
+    }
+
+    .app-title {
+        font-size: 2.3rem;
+    }
+
+    .header-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .dashboard-hero {
+        padding: 3rem;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 2.5rem;
+    }
+
+    .greeting {
+        text-align: left;
+    }
+
+    .greeting h2 {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .greeting p {
+        font-size: 1.3rem;
+    }
+
+    .stats-summary {
+        gap: 2rem;
+    }
+
+    .stat {
+        font-size: 1.1rem;
+    }
+
+    .stat-value {
+        font-size: 2.3rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem;
+    }
+
+    .stat-box {
+        padding: 2.5rem;
+        font-size: 1.15rem;
+    }
+
+    .stat-box i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .stat-box span {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 1rem 0;
+        display: block;
+    }
+
+    .stat-box small {
+        font-size: 1rem;
+    }
+
+    .exercises-list {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.5rem;
+    }
+
+    .meals-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .workout-card {
+        padding: 2.5rem;
+    }
+
+    .achievement-badge {
+        width: 150px;
+        height: 150px;
+    }
+
+    .achievement-icon {
+        font-size: 3rem;
+    }
+
+    .achievement-text {
+        font-size: 1.1rem;
+    }
+
+    .achievement-desc {
+        font-size: 0.95rem;
+    }
+
+    .dashboard-section {
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .dashboard-section h3 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 1rem;
+        font-size: 1.05rem;
+    }
+
+    .form-group label {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .exercise-item,
+    .meal-item,
+    .pr-item,
+    .achievement-item {
+        padding: 1.5rem;
+        font-size: 1.05rem;
+    }
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/* ========================================
+   Scrollbar
+   ======================================== */
+
+.app-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.app-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.app-content::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.app-content::-webkit-scrollbar-thumb:hover {
+    background: #ffed4e;
+}

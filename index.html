@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>DMNCalisthenics - Your Fitness Companion</title>
+    <link rel="stylesheet" href="app-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="timeDisplay">09:41</span>
+            <div class="status-icons">
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
+        <!-- App Header -->
+        <header class="app-header">
+            <button class="header-btn" id="backBtn" style="display:none;">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="header-logo">
+                <img src="Media/Logo/dmn-logo.png" alt="DMNCalisthenics Logo" class="logo-img">
+                <h1 class="app-title" id="pageTitle">DMNCalisthenics</h1>
+            </div>
+            <button class="header-btn" id="settingsBtn">
+                <i class="fas fa-cog"></i>
+            </button>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-content">
+            <!-- Dashboard View -->
+            <div class="view" id="dashboardView">
+                <div class="dashboard-hero">
+                    <div class="greeting">
+                        <h2>Welcome Back</h2>
+                        <p id="userName">Athlete</p>
+                    </div>
+                    <div class="stats-summary">
+                        <div class="stat">
+                            <span class="stat-value" id="weekStreak">0</span>
+                            <span class="stat-label">Day Streak</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="weekWorkouts">0</span>
+                            <span class="stat-label">This Week</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="todayProgress">0%</span>
+                            <span class="stat-label">Today</span>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="dashboard-section">
+                    <h3>Today's Workout</h3>
+                    <div id="todayWorkout" class="workout-card">
+                        <p>No workout scheduled for today</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="goToView('trainingView')">
+                        <i class="fas fa-dumbbell"></i> Start Training
+                    </button>
+                </section>
+
+                <section class="dashboard-section">
+                    <h3>Quick Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <i class="fas fa-fire"></i>
+                            <span id="totalCals">0</span>
+                            <small>Total Workouts</small>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-chart-line"></i>
+                            <span id="bestExercise">—</span>
+                            <small>Best Exercise</small>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-utensils"></i>
+                            <span id="mealsLogged">0</span>
+                            <small>Meals Logged</small>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-target"></i>
+                            <span id="goalProgress">0%</span>
+                            <small>Goal Progress</small>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard-section">
+                    <h3>Navigation</h3>
+                    <div class="nav-grid">
+                        <button class="nav-item" onclick="goToView('trainingView')">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="nav-item" onclick="goToView('nutritionView')">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Nutrition</span>
+                        </button>
+                        <button class="nav-item" onclick="goToView('progressView')">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Progress</span>
+                        </button>
+                        <button class="nav-item" onclick="goToView('profileView')">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Training View -->
+            <div class="view" id="trainingView" style="display:none;">
+                <div class="tabs">
+                    <button class="tab-btn active" data-filter="all">All</button>
+                    <button class="tab-btn" data-filter="beginner">Beginner</button>
+                    <button class="tab-btn" data-filter="intermediate">Intermediate</button>
+                    <button class="tab-btn" data-filter="advanced">Advanced</button>
+                </div>
+                <div id="trainingList" class="training-list"></div>
+            </div>
+
+            <!-- Workout Detail View -->
+            <div class="view" id="workoutDetailView" style="display:none;">
+                <div id="workoutDetail"></div>
+            </div>
+
+            <!-- Nutrition View -->
+            <div class="view" id="nutritionView" style="display:none;">
+                <div class="tabs">
+                    <button class="tab-btn active" data-filter="all">Overview</button>
+                    <button class="tab-btn" data-filter="breakfast">Breakfast</button>
+                    <button class="tab-btn" data-filter="lunch">Lunch</button>
+                    <button class="tab-btn" data-filter="dinner">Dinner</button>
+                </div>
+                <div class="nutrition-container">
+                    <div id="macroSummary" class="macro-summary">
+                        <div class="macro protein">
+                            <span class="macro-label">Protein</span>
+                            <span class="macro-value" id="proteinCount">0g</span>
+                            <span class="macro-goal">/ 150g</span>
+                        </div>
+                        <div class="macro carbs">
+                            <span class="macro-label">Carbs</span>
+                            <span class="macro-value" id="carbsCount">0g</span>
+                            <span class="macro-goal">/ 250g</span>
+                        </div>
+                        <div class="macro fats">
+                            <span class="macro-label">Fats</span>
+                            <span class="macro-value" id="fatsCount">0g</span>
+                            <span class="macro-goal">/ 70g</span>
+                        </div>
+                    </div>
+
+                    <section class="meal-section">
+                        <h3>Meals</h3>
+                        <div id="mealsList"></div>
+                        <button class="btn btn-primary" onclick="showAddMeal()">
+                            <i class="fas fa-plus"></i> Add Meal
+                        </button>
+                    </section>
+
+                    <section class="nutrition-tips">
+                        <h3>Nutrition Tips</h3>
+                        <div id="nutritionTipsList"></div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Add Meal Modal -->
+            <div class="modal" id="addMealModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Add Meal</h2>
+                        <button class="close-btn" onclick="hideAddMeal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="addMealForm" onsubmit="addMeal(event)">
+                        <div class="form-group">
+                            <label>Meal Name</label>
+                            <input type="text" required placeholder="e.g., Chicken & Rice">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Protein (g)</label>
+                                <input type="number" required placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Carbs (g)</label>
+                                <input type="number" required placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Fats (g)</label>
+                                <input type="number" required placeholder="0">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Meal</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Progress View -->
+            <div class="view" id="progressView" style="display:none;">
+                <div class="tabs">
+                    <button class="tab-btn active" data-filter="weekly">Weekly</button>
+                    <button class="tab-btn" data-filter="monthly">Monthly</button>
+                    <button class="tab-btn" data-filter="yearly">Yearly</button>
+                </div>
+
+                <section class="progress-section">
+                    <h3>Workout History</h3>
+                    <div class="chart-placeholder">
+                        <div id="workoutChart" style="height: 250px;"></div>
+                    </div>
+                </section>
+
+                <section class="progress-section">
+                    <h3>Personal Records</h3>
+                    <div id="prList" class="pr-list"></div>
+                </section>
+
+                <section class="progress-section">
+                    <h3>Achievements</h3>
+                    <div id="achievementsList" class="achievements-grid"></div>
+                </section>
+
+                <section class="progress-section">
+                    <h3>Recent Workouts</h3>
+                    <div id="recentWorkouts" class="workout-history"></div>
+                </section>
+            </div>
+
+            <!-- Profile View -->
+            <div class="view" id="profileView" style="display:none;">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2 id="profileName">Your Profile</h2>
+                    <p id="profileStats">0 Workouts | 0 Day Streak</p>
+                </div>
+
+                <section class="profile-section">
+                    <h3>Personal Information</h3>
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="inputName" placeholder="Your Name">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" id="inputAge" placeholder="25">
+                            </div>
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="inputWeight" placeholder="75">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Height (cm)</label>
+                                <input type="number" id="inputHeight" placeholder="180">
+                            </div>
+                            <div class="form-group">
+                                <label>Goal</label>
+                                <select id="inputGoal">
+                                    <option>Strength</option>
+                                    <option>Muscle Gain</option>
+                                    <option>Fat Loss</option>
+                                    <option>Endurance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="saveProfile()">
+                            Save Profile
+                        </button>
+                    </form>
+                </section>
+
+                <section class="profile-section">
+                    <h3>Goals</h3>
+                    <div id="goalsList" class="goals-list"></div>
+                </section>
+
+                <section class="profile-section">
+                    <h3>Preferences</h3>
+                    <div class="preference-item">
+                        <span>Dark Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="preference-item">
+                        <span>Notifications</span>
+                        <label class="switch">
+                            <input type="checkbox" id="notifToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="profile-section">
+                    <button class="btn btn-danger" onclick="resetData()">
+                        <i class="fas fa-trash"></i> Clear All Data
+                    </button>
+                </section>
+            </div>
+
+            <!-- Settings Modal -->
+            <div class="modal" id="settingsModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Settings</h2>
+                        <button class="close-btn" onclick="closeSettings()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="settings-list">
+                        <button class="settings-item" onclick="goToView('profileView'); closeSettings();">
+                            <i class="fas fa-user"></i>
+                            <span>Profile Settings</span>
+                        </button>
+                        <button class="settings-item" onclick="exportData()">
+                            <i class="fas fa-download"></i>
+                            <span>Export Data</span>
+                        </button>
+                        <button class="settings-item" onclick="importData()">
+                            <i class="fas fa-upload"></i>
+                            <span>Import Data</span>
+                        </button>
+                        <button class="settings-item danger" onclick="resetData()">
+                            <i class="fas fa-trash"></i>
+                            <span>Reset All Data</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Workout Modal -->
+            <div class="modal" id="completeWorkoutModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Log Workout</h2>
+                        <button class="close-btn" onclick="closeWorkoutModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="completeWorkoutForm" onsubmit="saveWorkout(event)">
+                        <div class="form-group">
+                            <label>Sets Completed</label>
+                            <input type="number" id="setsCompleted" min="1" value="3" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Reps per Set</label>
+                            <input type="number" id="repsCompleted" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="workoutNotes" placeholder="How did it feel?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Complete Workout</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Video Tutorial Modal -->
+            <div class="modal" id="videoModal">
+                <div class="modal-content modal-video">
+                    <div class="modal-header">
+                        <h2 id="videoTitle">Exercise Tutorial</h2>
+                        <button class="close-btn" onclick="closeVideoModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="video-container">
+                        <img id="videoPlaceholder" src="https://via.placeholder.com/600x400?text=Exercise+Video" alt="Video" style="width: 100%; border-radius: 12px; display: block;">
+                    </div>
+                    <div class="video-description">
+                        <h3 id="exerciseNameInVideo">Exercise Name</h3>
+                        <p id="exerciseDescInVideo">Description will appear here</p>
+                        <div class="video-tips">
+                            <h4>Form Tips:</h4>
+                            <ul id="formTips">
+                                <li>Keep your core engaged</li>
+                                <li>Control the movement</li>
+                                <li>Breathe steadily throughout</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-tab active" onclick="goToView('dashboardView')" data-view="dashboardView">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-tab" onclick="goToView('trainingView')" data-view="trainingView">
+                <i class="fas fa-dumbbell"></i>
+                <span>Training</span>
+            </button>
+            <button class="nav-tab" onclick="goToView('nutritionView')" data-view="nutritionView">
+                <i class="fas fa-apple-alt"></i>
+                <span>Nutrition</span>
+            </button>
+            <button class="nav-tab" onclick="goToView('progressView')" data-view="progressView">
+                <i class="fas fa-chart-bar"></i>
+                <span>Progress</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="app-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
